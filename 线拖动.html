@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>画直线</title>
+  <style>
+    canvas {
+      border: 1px solid;
+    }
+  </style>
+</head>
+<body>
+  <p>鼠标画直线</p>
+  <canvas width="800" height="600"></canvas>
+  <script>
+  var canvas = document.querySelector('canvas'),
+      context = canvas.getContext('2d'),
+      isDrag = false,
+      startPoint = {};
+
+
+  canvas.onmousedown = function () {
+    isDrag = true;
+    startPoint.x = event.x;
+    startPoint.y = event.y;
+  }
+
+  canvas.onmousemove = function() {
+    if(isDrag) {
+      context.beginPath();
+      context.moveTo(startPoint.x, startPoint.y);
+      context.lineTo(event.x, event.y);
+      context.stroke();
+    }
+  }
+
+  canvas.onmouseup = function() {
+    isDrag = false;
+  }
+  </script>
+</body>
+</html>
